@@ -39,7 +39,7 @@ const NavBar = (props) => {
             color={color}>
             <Link to={'/'}>
                 <Heading>
-                    🏋️‍♂️ Workout Tracker
+                    🏋️‍♂️ The Locker Room
                 </Heading>
             </Link>
             <Spacer/>

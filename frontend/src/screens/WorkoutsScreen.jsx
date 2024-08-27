@@ -5,7 +5,8 @@ import Spacer from '../components/universal/Gap'
 import { useState } from 'react'
 
 const WorkoutsScreen = () => {
-
+  const bg = 'white';
+  const color = 'orange.500'
 
   const [workoutSearchValue, setWorkoutSearchValue] = useState('');
   const onWorkoutSearchValueChange = (e) => {console.log(e.target.value); setWorkoutSearchValue(e.target.value)};
@@ -18,8 +19,9 @@ const WorkoutsScreen = () => {
         placeholder='Search for workouts'
         />
         <Spacer height={''}/>
-      <WorkoutGrid/>
 
+      
+      <WorkoutGrid bg={bg} color={color} searchText={workoutSearchValue} zIndex={'1'}/>
     </>
   )
 }

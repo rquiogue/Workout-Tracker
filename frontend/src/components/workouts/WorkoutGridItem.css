@@ -1,0 +1,17 @@
+.workout-grid-item:hover{
+    box-shadow: 0px 0px 10px rgba(221, 107, 32, 0.5);
+    border-radius: 1rem;
+}
+
+.workout-grid-item-heading:hover{
+    text-decoration: underline;
+}
+
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

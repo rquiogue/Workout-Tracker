@@ -1,23 +1,35 @@
 import React from 'react'
 import { 
     Center,
-    Grid, 
-    GridItem 
+    Grid
 } from '@chakra-ui/react'
 import Gap from '../universal/Gap'
 import workouts from '../../assets/workouts'
+import WorkoutGridItem from './WorkoutGridItem'
+import './WorkoutsScreen.css'
 
-const WorkoutGrid = () => {
+const WorkoutGrid = (props) => {
+    const {
+        bg,
+        color,
+        searchText
+    } = props;
+
+    const filterBasedOnSearch = (workout) => {
+        const workoutLowerCaseName = workout.name.toLowerCase();
+        const searchTextLowerCase = searchText.toLowerCase();
+        return workoutLowerCaseName.includes(searchTextLowerCase)
+    }
+
   return (
-    <Center>
+    <Center className='backdrop'>
         <Gap height={'60rem'}/>
-        <Grid w={'70%'} h={'50rem'} templateColumns='repeat(3, 1fr)' gap={6}>
-            {workouts.map((workout) => {
-                return (<GridItem key={workout.id} w='100%' h='10' bg='blue.500'>
-                    {workout.name}
-                </GridItem>)
+        <Grid w={'70%'} h={'50rem'} templateColumns={'repeat(3, 1fr)'} gridAutoRows={'40%'} gap={6} marginBottom={'50rem'} marginTop={'5rem'}>
+            {workouts.filter(filterBasedOnSearch)
+                    .map((workout) => {
+                return (<WorkoutGridItem key={workout.id} workout={workout} bg={bg} color={color}/>)
             })}
-        </Grid>
+        </Grid>\
     </Center>
   )
 }
