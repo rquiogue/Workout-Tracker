@@ -38,7 +38,7 @@ const WorkoutInformationCard = ({workout, color}) => {
                 <strong>Exercises</strong>
             </Heading>
             <Flex justifyContent={'start'}>
-                <Flex flexDirection={'column'} gap={6} w={'70%'}>
+                <Flex flexDirection={'column'} gap={6} w={'100%'}>
                     {workout.exercises
                         .map((exercise, index) => {
                             return (<ExerciseGridItem key={index} exercise={exercise}/>)

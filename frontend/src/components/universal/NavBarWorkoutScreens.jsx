@@ -30,7 +30,8 @@ const NavBarWorkoutScreens = () => {
             justifyContent={'center'} 
             gap='3rem' 
             bg={bg}
-            color={color}>
+            color={color}
+            zIndex={1}>
             <Link to={'/'}>
                 <Heading>
                     🏋️‍♂️ The Locker Room

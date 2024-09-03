@@ -18,7 +18,7 @@ const IndividualWorkoutInformation = () => {
 
   return (
     <Backdrop>
-        <Grid w={'70%'} h={'fit-content'} templateColumns={'2fr 1fr'} gridAutoRows={'40rem'} gap={'3rem'} marginBottom={'50rem'} marginTop={'5rem'}>
+        <Grid w={'70%'} h={'fit-content'} templateColumns={'2fr 1fr'} gridAutoRows={'40rem'} gap={'3rem'} marginBottom={'10rem'} marginTop={'5rem'}>
             <GridItem>
                 <WorkoutInformationCard workout={workout} color={color}/>
             </GridItem>
