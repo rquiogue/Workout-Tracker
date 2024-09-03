@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Gap from '../universal/Gap'
 import { LinkIcon } from '@chakra-ui/icons'
-import './WorkoutGridItem.css'
 
 const WorkoutGridItem = (props) => {
     const {
@@ -25,11 +24,11 @@ const WorkoutGridItem = (props) => {
                     </Text>
                 </Link>
                 <Gap height={'1rem'}></Gap>
-                <Text color={'grey'}>
+                <Text color={'0B1215'}>
                     Type: {workout.type}
                 </Text>
                 <Gap height={'1rem'}></Gap>
-                <Text h={'50%'} w={'100%'} color={'grey'}  className='description'>
+                <Text h={'50%'} w={'100%'} color={'0B1215'}  className='description'>
                     Description: {workout.description}
                 </Text>
             </Box>

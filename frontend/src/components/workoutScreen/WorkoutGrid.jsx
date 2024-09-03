@@ -6,7 +6,7 @@ import {
 import Gap from '../universal/Gap'
 import workouts from '../../assets/workouts'
 import WorkoutGridItem from './WorkoutGridItem'
-import './WorkoutsScreen.css'
+import Backdrop from '../universal/Backdrop'
 
 const WorkoutGrid = (props) => {
     const {
@@ -22,15 +22,14 @@ const WorkoutGrid = (props) => {
     }
 
   return (
-    <Center className='backdrop'>
-        <Gap height={'60rem'}/>
+    <Backdrop>
         <Grid w={'70%'} h={'50rem'} templateColumns={'repeat(3, 1fr)'} gridAutoRows={'40%'} gap={6} marginBottom={'50rem'} marginTop={'5rem'}>
             {workouts.filter(filterBasedOnSearch)
                     .map((workout) => {
                 return (<WorkoutGridItem key={workout.id} workout={workout} bg={bg} color={color}/>)
             })}
-        </Grid>\
-    </Center>
+        </Grid>
+    </Backdrop>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import NavBar from '../components/universal/NavBar'
-import WorkoutGrid from '../components/workouts/WorkoutGrid'
-import Spacer from '../components/universal/Gap'
+import NavBar from '../components/universal/NavBarWithSearch'
+import WorkoutGrid from '../components/workoutScreen/WorkoutGrid'
+import Gap from '../components/universal/Gap'
 import { useState } from 'react'
 
 const WorkoutsScreen = () => {
@@ -18,7 +18,7 @@ const WorkoutsScreen = () => {
         onSearchValueChange={onWorkoutSearchValueChange}
         placeholder='Search for workouts'
         />
-        <Spacer height={''}/>
+
 
       
       <WorkoutGrid bg={bg} color={color} searchText={workoutSearchValue} zIndex={'1'}/>
