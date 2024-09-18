@@ -20,13 +20,31 @@ import {
  } from '@chakra-ui/react'
  import Exercise from './Exercise'
 import { useNavigate } from 'react-router-dom'
+import BackButton from '../universal/BackButton'
 
 const CreateWorkoutForm = () => {
+    // Setting up navigate so we can use it for the buttons later
     const navigate = useNavigate();
 
-    const toast = useToast();
+    // Setting up variables for form control
+    const [name, setName] = useState("");
+    const onNameChange = (e) => setName(e.target.value);
+
+    const [type, setType] = useState("");
+    const onTypeChange = (e) => setType(e.target.value);
+
+    const [intensity, setIntensity] = useState("");
+    const onIntensityChange = (e) => setIntensity(e.target.value);
+
+    const [description, setDescription] = useState("");
+    const onDescriptionChange = (e) => setDescription(e.target.value);
 
     const [exercises, setExercises] = useState([]);
+
+    // Setting up the toast
+    const toast = useToast();
+
+    // Using an id so we know which exercise we want to delete
     const [currentId, setCurrentId] = useState(1);
 
     const nextId = () => {
@@ -35,36 +53,67 @@ const CreateWorkoutForm = () => {
         return id
     }
 
+    /* 
+        Here we have a series of functions that allow for manipulation of the exercises array
+
+        newExercise() allows us to add a new exercise to the array
+
+        deleteExercise(id) will remove the specified exercise from the array based on the id
+
+        changeExercise(id) will change the specified exercise baseed on the id and the new exercise given
+    */
     const newExercise = () => {
         const id = nextId();
 
         setExercises((prev) => {
             const newExercise = {
-                id: 1,
+                id: id,
                 exerciseName: `Exercise ${id}`,
-                type: 'Weight'
+                type: 'Weight',
+                weight: '',
+                sets: '',
+                reps: '',
+                duration: '',
             }
             return [...prev, newExercise]
         });
 
         console.log(exercises)
     }
+    
+    const deleteExercise = (id) => {
+      setExercises((prev) => {
+          return prev.filter((exercise) => exercise.id != id)
+      })
+    }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    toast({
-      title: "Form submitted.",
-      description: "You've successfully submitted the form.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
-  };
+    const changeExercises = (id, updatedExercise) => {
+        setExercises((prev) => {
+            return prev.map(exercise => 
+                exercise.id === id ? updatedExercise : exercise
+            );
+        });
+    }
+
+    // Used when the form is submitted
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        toast({
+        title: "Form submitted.",
+        description: "You've successfully submitted the form.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        });
+    };
+
 
 
 
   return (
     <Backdrop>
+        <BackButton link={'/'}/>
+
         <Flex width={'70%'} display={'column'} alignItems={'start'} marginBottom={'10rem'} marginTop={'5rem'}>
             <Card >
                 <CardHeader>
@@ -77,15 +126,15 @@ const CreateWorkoutForm = () => {
                     <Stack spacing={4}>
                         <FormControl id="name" isRequired>
                             <FormLabel>Workout Name</FormLabel>
-                            <Input type="text" placeholder="Workout" />
+                            <Input type="text" placeholder="Workout" value={name} onChange={onNameChange}/>
                         </FormControl>
                         <FormControl id="type" isRequired>
                             <FormLabel>Type</FormLabel>
-                            <Input type="text" placeholder="Type" />
+                            <Input type="text" placeholder="Type" value={type} onChange={onTypeChange}/>
                         </FormControl>
                         <FormControl id="intensity" isRequired>
                             <FormLabel>Intensity</FormLabel>
-                            <Select placeholder='Select option'>
+                            <Select placeholder='Select option' value={intensity} onChange={onIntensityChange}>
                                 <option value='Low'>Low</option>
                                 <option value='Moderate'>Moderate</option>
                                 <option value='High'>High</option>
@@ -94,13 +143,16 @@ const CreateWorkoutForm = () => {
                         </FormControl>
                         <FormControl id="description" isRequired>
                             <FormLabel>Description</FormLabel>
-                            <Textarea placeholder='Description' />
+                            <Textarea placeholder='Description' value={description} onChange={onDescriptionChange}/>
                         </FormControl>
                         <Divider />
                         <Flex justifyContent={'center'}>
                             <Grid w={'100%'} h={'fit-content'} templateColumns={'1fr 1fr 1fr'} gap={'5rem'}>
                                 {exercises.map((exercise) => {
-                                    return (<Exercise key={exercise.id} exerciseName={exercise.exerciseName}/>)
+                                    return (<Exercise key={exercise.id} 
+                                                exercise={exercise} 
+                                                deleteExercise={() => deleteExercise(exercise.id)} 
+                                                handleChange={(id, updatedExercise) => changeExercises(id, updatedExercise)}/>)
                                 })}
                             </Grid>
                         </Flex>

@@ -1,6 +1,7 @@
 .workout-grid-item:hover{
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .workout-grid-item-heading:hover{

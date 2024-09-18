@@ -8,6 +8,7 @@ import workouts from '../../assets/workouts'
 import CommentsSection from './CommentsSection'
 import WorkoutInformationCard from './WorkoutInformationCard'
 import { useParams } from 'react-router-dom'
+import BackButton from '../universal/BackButton'
 
 const IndividualWorkoutInformation = () => {
     const color = 'orange.500';
@@ -18,6 +19,8 @@ const IndividualWorkoutInformation = () => {
 
   return (
     <Backdrop>
+        <BackButton link={'/workouts'}/>
+
         <Grid w={'70%'} h={'fit-content'} templateColumns={'2fr 1fr'} gridAutoRows={'40rem'} gap={'3rem'} marginBottom={'10rem'} marginTop={'5rem'}>
             <GridItem>
                 <WorkoutInformationCard workout={workout} color={color}/>

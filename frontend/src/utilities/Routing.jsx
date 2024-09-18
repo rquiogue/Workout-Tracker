@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import WorkoutsScreen from '../screens/WorkoutsScreen'
 import IndividualWorkoutScreen from '../screens/IndividualWorkoutScreen'
 import CreateWorkoutScreen from '../screens/CreateWorkoutScreen'
+import LoginScreen from '../screens/LoginScreen'
+import RegisterScreen from '../screens/RegisterScreen'
 
 const Routing = () => {
   return (
@@ -12,6 +14,8 @@ const Routing = () => {
           <Route path='/workouts' element={<WorkoutsScreen/>}/>
           <Route path='/workouts/:id' element={<IndividualWorkoutScreen/>}/>
           <Route path='/createWorkout' element={<CreateWorkoutScreen/>}/>
+          <Route path='/login' element={<LoginScreen/>}/>
+          <Route path='/register' element={<RegisterScreen/>}/>
         </Routes>
       </Router>
   )

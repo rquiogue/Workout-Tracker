@@ -1,63 +1,78 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
+    Flex,
     FormControl,
     FormLabel,
     GridItem,
     Heading,
+    IconButton,
     Input,
     Select
 } from '@chakra-ui/react'
+import { DeleteIcon } from '@chakra-ui/icons';
 
 const Exercise = (props) => {
     const {
-        exerciseName,
+        exercise,
+        handleChange,
+        deleteExercise
     } = props
 
-    const [name, setName] = useState(exerciseName);
-    const nameOnChange = (e) =>  setName(e.target.value)
+    // Sets up the exercise and allows the inputs to change it
+    const [currentExercise, setCurrentExercise] = useState(exercise);
 
-    const [exerciseType, setExerciseType] = useState('Weight');
-    const typeOnChange = (e) => setExerciseType(e.target.value);
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+
+        setCurrentExercise((prev) => {
+            return {...prev, [name]: value}
+        })
+    }
+
+    // Everytime the current exercise is changed we want to update the array in the parent component
+    useEffect(() => {
+        handleChange(exercise.id, currentExercise)
+    }, [currentExercise]);
+
+    
 
   return (
     <GridItem>
+            <Flex flexDirection={'row'} justifyContent={'end'} alignItems={'end'}>
+                <IconButton colorScheme='red' icon={<DeleteIcon/>} onClick={deleteExercise}/>
+            </Flex>
         <FormControl>
-            <FormLabel>
-                <Heading size={'md'}>
-                    {name}
-                </Heading>
-            </FormLabel>
-            <FormLabel>
-                Exercise Name
-            </FormLabel>
-            <Input placeholder='Exercise Name' value={name} onChange={nameOnChange}/>
+                <FormLabel>
+                    Exercise Name
+                </FormLabel>
+            <Input placeholder='Exercise Name' name='exerciseName' value={currentExercise.exerciseName} onChange={handleInputChange}/>
             <FormLabel>
                 Type
             </FormLabel>
-            <Select value={exerciseType} onChange={typeOnChange}>
+            <Select name='type' value={currentExercise.type} onChange={handleInputChange}>
                 <option value='Weight'>Weight</option>
                 <option value='Duration'>Duration</option>
             </Select>
         </FormControl>
-        {exerciseType === 'Weight' ? (
+        {exercise.type === 'Weight' ? (
             <>
                 <FormControl>
                     <FormLabel>
                         Weight
                     </FormLabel>
-                    <Input placeholder='Weight'/>
+                    <Input placeholder='Weight' name='weight' value={currentExercise.weight} onChange={handleInputChange}/>
                 </FormControl>
                 <FormControl>
                     <FormLabel>
                         Sets
                     </FormLabel>
-                    <Input placeholder='Sets'/>
+                    <Input placeholder='Sets' name='sets' value={currentExercise.sets} onChange={handleInputChange}/>
                 </FormControl>
                 <FormControl>
                     <FormLabel>
                         Reps
                     </FormLabel>
-                    <Input placeholder='Reps'/>
+                    <Input placeholder='Reps' name='reps' value={currentExercise.reps} onChange={handleInputChange}/>
                 </FormControl>
             </>
         ) : (
@@ -65,7 +80,7 @@ const Exercise = (props) => {
                 <FormLabel>
                     Duration
                 </FormLabel>
-                <Input placeholder='Time'/>
+                <Input placeholder='Time' name='duration' value={currentExercise.duration} onChange={handleInputChange}/>
             </FormControl>
         )}
     </GridItem>

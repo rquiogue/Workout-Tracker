@@ -11,6 +11,7 @@ import {
 import { SearchIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom' 
 import Gap from './Gap'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
 
 const NavBarWorkoutScreens = () => {
     const bg = 'white';
@@ -47,15 +48,20 @@ const NavBarWorkoutScreens = () => {
                     </Heading>
                 </Link>
 
-                <Link to={'/login'}>
-                    <Button h='3.25rem' 
-                        width={'8rem'}
-                        bg={color}
-                        color={bg}
-                        fontSize='1.75rem'>
-                        Log in
-                    </Button>
-                </Link>
+                <SignedOut>
+                    <Link to={'/login'}>
+                        <Button h='3.25rem' 
+                            width={'8rem'}
+                            bg={color}
+                            color={bg}
+                            fontSize='1.75rem'>
+                            Log in
+                        </Button>
+                    </Link>
+                </SignedOut>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
             </Flex>
             
         </Flex>

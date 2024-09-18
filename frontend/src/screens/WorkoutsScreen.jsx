@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { IconButton } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
+import { useUser } from '@clerk/clerk-react'
 
 const WorkoutsScreen = () => {
   const bg = 'white';
@@ -14,14 +15,25 @@ const WorkoutsScreen = () => {
   const [workoutSearchValue, setWorkoutSearchValue] = useState('');
   const onWorkoutSearchValueChange = (e) => {console.log(e.target.value); setWorkoutSearchValue(e.target.value)};
 
+  const {
+    isSignedIn,
+    isLoaded,
+    user
+  } = useUser();
+
+  console.log(`isSignedIn: ${isSignedIn}, isLoaded: ${isLoaded}`);
+  console.log(JSON.stringify(user));
+
   return (
     <>
+      {/* 
+        Nav Bar with a search option
+      */}
       <NavBar
         searchValue={workoutSearchValue}
         onSearchValueChange={onWorkoutSearchValueChange}
         placeholder='Search for workouts'
         />
-
 
       
       <WorkoutGrid bg={bg} color={color} searchText={workoutSearchValue} zIndex={'1'}/>

@@ -15,6 +15,10 @@ const WorkoutGrid = (props) => {
         searchText
     } = props;
 
+    /* 
+        Function created in order to filter the workouts based on the current search
+    */
+
     const filterBasedOnSearch = (workout) => {
         const workoutLowerCaseName = workout.name.toLowerCase();
         const searchTextLowerCase = searchText.toLowerCase();
@@ -23,7 +27,12 @@ const WorkoutGrid = (props) => {
 
   return (
     <Backdrop>
-        <Grid w={'70%'} h={'50rem'} templateColumns={'repeat(3, 1fr)'} gridAutoRows={'40%'} gap={6} marginBottom={'50rem'} marginTop={'5rem'}>
+
+        {/* 
+            Grid used to display the the workouts basic information
+        */}
+
+        <Grid w={'70%'} h={'50rem'} templateColumns={'repeat(3, 1fr)'} gridAutoRows={'40%'} gap={6} marginBottom={'20rem'} marginTop={'5rem'}>
             {workouts.filter(filterBasedOnSearch)
                     .map((workout) => {
                 return (<WorkoutGridItem key={workout.id} workout={workout} bg={bg} color={color}/>)
